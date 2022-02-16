@@ -173,11 +173,11 @@ __metadata:
   linkType: hard
 
 "@ampproject/remapping@npm:^2.1.0":
-  version: 2.1.1
-  resolution: "@ampproject/remapping@npm:2.1.1"
+  version: 2.1.2
+  resolution: "@ampproject/remapping@npm:2.1.2"
   dependencies:
     "@jridgewell/trace-mapping": ^0.3.0
-  checksum: cc5cf29833e2b8bdf420821a6e027a35cf6a48605df64ae5095b55cb722581b236554fc8f920138e6da3f7a99ec99273b07ebe2e2bb98b6a4a8d8e33648cac77
+  checksum: e023f92cdd9723f3042cde3b4d922adfeef0e198aa73486b0b6c034ad36af5f96e5c0cc72b335b30b2eb9852d907efc92af6bfcd3f4b4d286177ee32a189cf92
   languageName: node
   linkType: hard
 
@@ -13991,9 +13991,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zwiki@workspace:.":
+"zw@workspace:.":
   version: 0.0.0-use.local
-  resolution: "zwiki@workspace:."
+  resolution: "zw@workspace:."
   dependencies:
     "@cloudflare/workers-types": 3.4.0
     "@crowdin/cli": 3.7.7
