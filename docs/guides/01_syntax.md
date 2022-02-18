@@ -33,7 +33,7 @@ zi as"null" wait"3" lucid for \
 
 Above single command installs 6 plugins ([git extension](https://z-shell.pages.dev/search/?q=git+ext) packages), with the base ices `as"null" wait"3" lucid` that are common to all of the plugins and 6 plugin-specific add-on ices.
 
-## Use cases of `for` syntax {#use-cases-of-for-syntax}
+### Use cases of `for` syntax {#use-cases-of-for-syntax}
 
 Load a few useful binary (i.e.: [binary packages from the GitHub Releases](https://z-shell.pages.dev/search/?q=GH-R)) utils:
 
