@@ -33,7 +33,7 @@ zi as"null" wait"3" lucid for \
 
 Above single command installs 6 plugins ([git extension](https://z-shell.pages.dev/search/?q=git+ext) packages), with the base ices `as"null" wait"3" lucid` that are common to all of the plugins and 6 plugin-specific add-on ices.
 
-### Use cases of `for` syntax {#use-cases-of-for-syntax}
+## Use cases of `for` syntax {#use-cases-of-for-syntax}
 
 Load a few useful binary (i.e.: [binary packages from the GitHub Releases](https://z-shell.pages.dev/search/?q=GH-R)) utils:
 
@@ -68,66 +68,11 @@ zi wait lucid for \
   atload"unalias grv" OMZ::plugins/git/git.plugin.zsh
 ```
 
-## The `make'…'` syntax {#the-make-syntax}
-
-```shell
-zi ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zi light tj/git-extras
-```
-
-The `Makefile` of the project above has only 2 tasks:
-
-1. Install the target.
-2. Build scripts that is required for installation.
-
-The `Makefile` with 2 tasks, can use:
-
-1. `make"all install PREFIX=…"`,
-2. `pick'…'` will `chmod +x` all matching files and add `$ZPFX/bin/` to `$PATH`.
-
-:::info
-
-`$ZPFX` is provided by ZI, it is set to `~/.zi/polaris` by default. However it can changed by specifying custom `$ZPFX=` target if required.
-
-More information: [guides/customization](/docs/guides/customization)
-
-:::
-
 ## The `bindmap'…'` keybindings
 
 Sometimes plugins call [bindkey](https://z-shell.pages.dev/search/?q=binkey) to assign keyboard shortucts. This can cause problems, because multiple plugins can bind the same keys. Also, the user might want a different binding(s), which will require a complicated, additional `bindkey` commands in `.zshrc`.
 
 ZI provides a solution to this problem – the ability to remap the bindkeys with a short [ice-modifier](https://z-shell.pages.dev/search/?q=ice+modifier) specification with the `bindmap'…'` [ice](/docs/guides/ice).
-
-### Examples for `bindmap'…'`
-
-Map Ctrl-G instead of Ctrl-R for the history searcher.
-
-```shell
-zi bindmap'^R -> ^G' for z-shell/history-search-multi-word
-
-```
-
-Map Ctrl-Shift-Left and …-Right used by URxvt instead of the Xterms' ones. Load with the bindkey-tracking ↔ with light-loading for anything else.
-
-```shell
-# Could also separate the bindmaps with a semicolon, i.e.:
-# `bindmap'"\\e[1\;6D" -> \\e[1\;5D ; "\\e[1\;6C" -> ^[[1\;5C' \`
-
-zi wait light-mode trackbinds bindmap'"\\e[1\;6D" -> \\e[1\;5D"' \
-  bindmap'"\\e[1\;6C" -> ^[[1\;5C' pick'dircycle.zsh' for \
-  michaelxmcbride/zsh-dircycle
-```
-
-Map space to regular space and Ctrl-Space to the `globalias' widget, which expands the alias entered on the left (provided by OMZ globalias plugin).
-
-```shell
-zi bindmap='!" " -> magic-space; !"^ " -> globalias' nocompletions \
-  depth=1 pick=plugins/globalias/globalias.plugin.zsh for \
-  ohmyzsh/ohmyzsh
-```
-
-### Explanation
 
 The `bindmap'…'` ice has two modes of operation: normal and exclamation-mark (`bindmap'!…'`). In the first mode, the remapping is beind done from-key to-key, i.e.: `bindmap'fromkey -> to-key'`. The given key is being changed to the second given key in the `bindkey` command that's being actually issued when loading the plugin.
 
@@ -171,3 +116,56 @@ zi bindmap='LEFTAR -> ^F; RIGHTAR -> ^G' …
 ```
 
 The benefits of using the <kbd>UPAR</kbd>, … shorthands is that they cover multiple possible cursor-key codes for each of the cursor key, so that they'll work regardless of the terminal being used.
+
+### Examples for `bindmap'…'`
+
+Map Ctrl-G instead of Ctrl-R for the history searcher:
+
+```shell
+zi bindmap'^R -> ^G' for z-shell/history-search-multi-word
+
+```
+
+Map Ctrl-Shift-Left and …-Right used by URxvt instead of the Xterms' ones. Load with the bindkey-tracking ↔ with light-loading for anything else:
+
+```shell
+# Could also separate the bindmaps with a semicolon, i.e.:
+# `bindmap'"\\e[1\;6D" -> \\e[1\;5D ; "\\e[1\;6C" -> ^[[1\;5C' \`
+
+zi wait light-mode trackbinds bindmap'"\\e[1\;6D" -> \\e[1\;5D"' \
+  bindmap'"\\e[1\;6C" -> ^[[1\;5C' pick'dircycle.zsh' for \
+  michaelxmcbride/zsh-dircycle
+```
+
+Map space to regular space and Ctrl-Space to the `globalias' widget, which expands the alias entered on the left (provided by OMZ globalias plugin):
+
+```shell
+zi bindmap='!" " -> magic-space; !"^ " -> globalias' nocompletions \
+  depth=1 pick=plugins/globalias/globalias.plugin.zsh for \
+  ohmyzsh/ohmyzsh
+```
+
+## The `make'…'` syntax {#the-make-syntax}
+
+```shell
+zi ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zi light tj/git-extras
+```
+
+The `Makefile` of the project above has only 2 tasks:
+
+- Install the target.
+- Build scripts that is required for installation.
+
+The `Makefile` with 2 tasks, can use:
+
+- `make"all install PREFIX=…"`,
+- `pick'…'` will `chmod +x` all matching files and add `$ZPFX/bin/` to `$PATH`.
+
+:::info
+
+`$ZPFX` is provided by ZI, it is set to `~/.zi/polaris` by default. However it can changed by specifying custom `$ZPFX=` target if required.
+
+More information: [guides/customization](/docs/guides/customization)
+
+:::
